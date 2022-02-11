@@ -3,20 +3,25 @@ package beans;
 public class ContaBancaria {
 	private String numero;
 	private double saldo;
-	private String cliente;
+	private Cliente cliente;
 	private double limiteEspecial;
 	private String tipo;
+	private int agencia;
+	private Banco banco;
 
 	public ContaBancaria() {
 	}
 
-	public ContaBancaria(String numero, String cliente, double limiteEspecial, String tipo) {
+	public ContaBancaria(String numero, Cliente cliente, double limiteEspecial, String tipo, int agencia, Banco banco) {
 		super();
 		this.numero = numero;
 		this.cliente = cliente;
 		this.limiteEspecial = limiteEspecial;
 		this.tipo = tipo;
+		this.agencia = agencia;
+		this.banco = banco;
 	}
+
 
 	public String getNumero() {
 		return numero;
@@ -30,11 +35,11 @@ public class ContaBancaria {
 		return saldo;
 	}
 
-	public String getCliente() {
+	public Cliente getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(String cliente) {
+	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 
@@ -54,6 +59,22 @@ public class ContaBancaria {
 		this.tipo = tipo;
 	}
 	
+
+	public int getAgencia() {
+		return agencia;
+	}
+
+	public void setAgencia(int agencia) {
+		this.agencia = agencia;
+	}
+
+	public Banco getBanco() {
+		return banco;
+	}
+
+	public void setBanco(Banco banco) {
+		this.banco = banco;
+	}
 
 	public void definirLimite(double valor) {
 		if (valor < (this.limiteEspecial = 0)){
@@ -79,8 +100,8 @@ public class ContaBancaria {
 	}
 
 	public void extrato() {
-		System.out.println("Cliente: " + this.cliente + " Conta: " + this.numero + " Limite: " + this.limiteEspecial
-				+ " Saldo: " + this.saldo);
+		System.out.println( "Conta: " + this.numero +" Cliente: " + this.cliente.getNome() + " Limite: " + this.limiteEspecial
+				+ " Saldo: " + this.saldo + " Agencia: "+ this.agencia + " Banco: " + this.banco.getRazao());
 	}
 
 }
