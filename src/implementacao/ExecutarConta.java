@@ -13,6 +13,7 @@ public class ExecutarConta {
 		Cliente cliente = new Cliente("74789809898-23", Input.texto("Informe o Cliente: "),"999909000");
 		
 		ContaBancaria cc = new ContaBancaria(Input.texto("Informe o numero da conta")
+										   , 0
 										   , cliente
 										   , Input.decimalDouble("Informe o Limite Especial: ")
 										   , Input.texto("Informe tipo 'corrrente' ou 'poupança'")

@@ -12,16 +12,17 @@ public class ContaBancaria {
 	public ContaBancaria() {
 	}
 
-	public ContaBancaria(String numero, Cliente cliente, double limiteEspecial, String tipo, int agencia, Banco banco) {
+	public ContaBancaria(String numero, double saldo, Cliente cliente, double limiteEspecial, String tipo, int agencia,
+			Banco banco) {
 		super();
 		this.numero = numero;
+		this.saldo = saldo;
 		this.cliente = cliente;
 		this.limiteEspecial = limiteEspecial;
 		this.tipo = tipo;
 		this.agencia = agencia;
 		this.banco = banco;
 	}
-
 
 	public String getNumero() {
 		return numero;
@@ -58,7 +59,6 @@ public class ContaBancaria {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	
 
 	public int getAgencia() {
 		return agencia;
@@ -76,32 +76,36 @@ public class ContaBancaria {
 		this.banco = banco;
 	}
 
-	public void definirLimite(double valor) {
-		if (valor < (this.limiteEspecial = 0)){
-			System.out.println("inválido");
-		}else {
-			System.out.println("ok");
+	public String definirLimite(double valor) {
+		if (valor >= 0) {
+			if (this.tipo.equals("corrente")) {
+				this.limiteEspecial = valor;
+				return "Operação realizada com sucesso";
+			}
+			return "Tipo de Conta Inválida";
 		}
-
+		return "Valor de limite Inválido";
 	}
 
-	public void deposito(double valor) {
+	public String  deposito(double valor) {
 		this.saldo = this.saldo + valor;
-		System.out.println("Depósito no valor de " + valor + " efetuado com Sucesso.");
+		return "Depósito no valor de " + valor + " efetuado com Sucesso.";
 	}
 
-	public void saque(double valor) {
+	public String saque(double valor) {
 		if (valor > (this.saldo + this.limiteEspecial)) {
-			System.out.println("Valor indisponível para Saque. Sem Saldo");
+			return "Valor indisponível para Saque. Sem Saldo";
 		} else {
 			this.saldo = this.saldo - valor;
-			System.out.println("Saque no valor de " + valor + " efetuado com Sucesso.");
+			extrato();
+			return "Saque no valor de " + valor + " efetuado com Sucesso.";
 		}
 	}
 
 	public void extrato() {
-		System.out.println( "Conta: " + this.numero +" Cliente: " + this.cliente.getNome() + " Limite: " + this.limiteEspecial
-				+ " Saldo: " + this.saldo + " Agencia: "+ this.agencia + " Banco: " + this.banco.getRazao());
+		System.out.println(
+				"Conta: " + this.numero + " Cliente: " + this.cliente.getNome() + " Limite: " + this.limiteEspecial
+						+ " Saldo: " + this.saldo + " Agencia: " + this.agencia + " Banco: " + this.banco.getRazao());
 	}
 
 }
